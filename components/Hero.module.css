@@ -1,0 +1,67 @@
+.hero {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px 20px 24px;
+  position: relative;
+}
+
+.heading {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 46px;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+}
+
+.highlightWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.highlight {
+  position: absolute;
+  bottom: 4px;
+  left: -2px;
+  right: -2px;
+  height: 8px;
+  background: var(--yellow);
+  border-radius: 4px;
+  transform: rotate(-1deg);
+  z-index: -1;
+}
+
+.subheading {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  color: var(--brown);
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+.sparkleYellow, .sparklePink {
+  position: absolute;
+  font-size: 12px;
+}
+
+.sparkleYellow {
+  color: var(--yellow);
+  top: -10px;
+  left: -20px;
+}
+
+.sparklePink {
+  color: var(--pink);
+  bottom: 20px;
+  right: -25px;
+  font-size: 10px;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 34px;
+  }
+}

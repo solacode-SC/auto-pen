@@ -1,0 +1,349 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+.topBar {
+  margin-bottom: 24px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.backLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleIcon {
+  color: var(--yellow);
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--brown);
+  line-height: 1.5;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 24px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.cardIcon {
+  font-size: 18px;
+}
+
+.cardTitle {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: 14px;
+  color: var(--brown);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* API Key Input Group */
+.inputGroup {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.inputWrapper {
+  position: relative;
+  flex-grow: 1;
+}
+
+.apiKeyInput {
+  width: 100%;
+  padding: 12px 42px 12px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 14px;
+  font-family: monospace;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.apiKeyInput:focus {
+  border-color: var(--accent, var(--coral));
+}
+
+.toggleVisibility {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--brown);
+  padding: 4px;
+}
+
+.actionButton {
+  background: var(--accent, var(--coral));
+  color: white;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  padding: 0 20px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  white-space: nowrap;
+}
+
+.actionButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.actionButton:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.buttonRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.secondaryButton {
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.secondaryButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.secondaryButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.statusNotice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.statusConfigured {
+  background: var(--green-light);
+  color: var(--ink);
+  border: 1px solid var(--green);
+}
+
+.statusNotConfigured {
+  background: var(--cream);
+  color: var(--brown);
+  border: 1px dashed var(--brown);
+}
+
+/* Theme Mode Switcher */
+.modeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.modeCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--cream);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.modeCard:hover {
+  transform: translateY(-2px);
+}
+
+.modeCardActive {
+  background: var(--yellow);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.modeIcon {
+  font-size: 20px;
+}
+
+/* Color Accent Swatches */
+.accentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.accentCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--cream);
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.accentCard:hover {
+  transform: translateY(-2px);
+}
+
+.accentCardActive {
+  background: var(--paper);
+  box-shadow: 3px 3px 0 var(--ink);
+  border-color: var(--ink);
+}
+
+.accentSwatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+
+/* Live Preview */
+.previewBox {
+  margin-top: 16px;
+  padding: 16px;
+  border: 2px dashed rgba(31, 27, 22, 0.2);
+  border-radius: 14px;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.previewLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brown);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.previewButton {
+  background: var(--accent, var(--coral));
+  color: white;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .inputGroup {
+    flex-direction: column;
+  }
+  .modeGrid {
+    grid-template-columns: 1fr;
+  }
+  .previewBox {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backLink:hover,
+  .actionButton:hover,
+  .secondaryButton:hover,
+  .modeCard:hover,
+  .accentCard:hover {
+    transform: none;
+  }
+}
+

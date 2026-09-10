@@ -1,0 +1,51 @@
+.container {
+  padding: 24px 20px 8px;
+  text-align: center;
+}
+
+.button {
+  background: var(--coral);
+  background: var(--accent, var(--coral));
+  color: white;
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  border-radius: 14px;
+  padding: 14px 36px;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.button:not(:disabled):hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 5px 6px 0 var(--ink);
+}
+
+.button:not(:disabled):active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--brown);
+  opacity: 0.5;
+  margin-top: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  .button:not(:disabled):hover,
+  .button:not(:disabled):active {
+    transform: none;
+  }
+}

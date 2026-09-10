@@ -1,0 +1,18 @@
+.container {
+  max-width: 500px;
+  margin: 24px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--brown);
+  margin-top: 4px;
+}

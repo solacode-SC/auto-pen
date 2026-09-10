@@ -1,0 +1,25 @@
+.footer {
+  border-top: 2px solid var(--ink);
+  background: var(--cream);
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--brown);
+  margin-top: 4px;
+}
+
+.sparkle {
+  color: var(--yellow);
+  font-size: 16px;
+  margin-top: 8px;
+}
