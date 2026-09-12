@@ -2,13 +2,13 @@
   max-width: 700px;
   margin: 0 auto;
   text-align: center;
-  padding: 40px 20px 24px;
+  padding: clamp(24px, 5vw, 40px) 16px clamp(16px, 3vw, 24px);
   position: relative;
 }
 
 .heading {
   font-family: 'Fredoka', sans-serif;
-  font-size: 46px;
+  font-size: clamp(28px, 7vw, 46px);
   color: var(--ink);
   font-weight: 600;
   line-height: 1.2;
@@ -36,32 +36,39 @@
 
 .subheading {
   font-family: 'Nunito', sans-serif;
-  font-size: 18px;
+  font-size: clamp(15px, 3.8vw, 18px);
   color: var(--brown);
-  margin-top: 12px;
+  margin-top: 10px;
   margin-bottom: 0;
+  line-height: 1.4;
 }
 
 .sparkleYellow, .sparklePink {
   position: absolute;
   font-size: 12px;
+  user-select: none;
 }
 
 .sparkleYellow {
   color: var(--yellow);
   top: -10px;
-  left: -20px;
+  left: -18px;
 }
 
 .sparklePink {
   color: var(--pink);
   bottom: 20px;
-  right: -25px;
+  right: -20px;
   font-size: 10px;
 }
 
-@media (max-width: 768px) {
-  .heading {
-    font-size: 34px;
+@media (max-width: 480px) {
+  .sparkleYellow {
+    left: -10px;
+    top: -6px;
+  }
+  .sparklePink {
+    right: -10px;
+    bottom: 14px;
   }
 }

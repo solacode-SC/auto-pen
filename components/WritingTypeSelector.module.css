@@ -2,16 +2,18 @@
   max-width: 700px;
   margin: 0 auto;
   text-align: center;
-  padding: 0 20px 24px;
+  padding: 0 16px 20px;
 }
 
 .label {
   font-family: 'Nunito', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--ink);
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .pillContainer {
@@ -19,40 +21,73 @@
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
+  align-items: center;
 }
 
 .pill {
   background: var(--paper);
   border: 2px solid var(--ink);
   border-radius: 20px;
-  padding: 8px 18px;
+  padding: 7px 16px;
   font-size: 14px;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--ink);
   cursor: pointer;
   transition: all 150ms ease;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .pill:not(.selected):hover {
   transform: translateY(-2px);
 }
 
+.pill:active {
+  transform: scale(0.97);
+}
+
 .selected {
   background: var(--yellow);
   box-shadow: 3px 3px 0 var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .hint {
   color: var(--brown);
   font-size: 13px;
   font-style: italic;
-  margin-top: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .pillContainer {
+    gap: 6px;
+  }
+  .pill {
+    padding: 6px 12px;
+    font-size: 13px;
+    min-height: 36px;
+  }
+  .selected {
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+}
+
+@media (max-width: 360px) {
+  .pill {
+    padding: 5px 9px;
+    font-size: 12px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pill:not(.selected):hover {
+  .pill:not(.selected):hover,
+  .pill:active {
     transform: none;
   }
 }

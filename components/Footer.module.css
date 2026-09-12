@@ -1,14 +1,14 @@
 .footer {
   border-top: 2px solid var(--ink);
   background: var(--cream);
-  padding: 20px;
+  padding: 20px 16px max(20px, env(safe-area-inset-bottom));
   text-align: center;
   position: relative;
 }
 
 .title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -20,6 +20,6 @@
 
 .sparkle {
   color: var(--yellow);
-  font-size: 16px;
-  margin-top: 8px;
+  font-size: 15px;
+  margin-top: 6px;
 }

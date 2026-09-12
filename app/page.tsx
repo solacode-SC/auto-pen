@@ -123,7 +123,7 @@ export default function Page() {
         />
       </WritingEditor>
       {validationError && (
-        <div style={{ textAlign: 'center', color: 'var(--coral)', fontSize: '14px', fontWeight: 600, padding: '8px 20px', marginTop: '-8px' }}>
+        <div style={{ textAlign: 'center', color: 'var(--coral)', fontSize: '14px', fontWeight: 600, padding: '8px 16px', marginTop: '-4px', wordBreak: 'break-word' }}>
           {validationError}
         </div>
       )}

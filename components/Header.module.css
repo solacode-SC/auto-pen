@@ -1,18 +1,23 @@
 .header {
-  height: 56px;
+  min-height: 56px;
   background: var(--cream);
   border-bottom: 2px solid var(--ink);
   width: 100%;
+  position: relative;
+  z-index: 100;
 }
 
 .container {
   max-width: 1100px;
-  height: 100%;
+  min-height: 56px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 8px 20px;
+  padding-left: max(14px, env(safe-area-inset-left));
+  padding-right: max(14px, env(safe-area-inset-right));
+  gap: 8px;
 }
 
 .left {
@@ -21,11 +26,13 @@
   gap: 6px;
   text-decoration: none;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .logoMark {
   color: var(--yellow);
   font-size: 22px;
+  line-height: 1;
 }
 
 .logoText {
@@ -33,13 +40,14 @@
   font-weight: 600;
   font-size: 22px;
   color: var(--ink);
+  line-height: 1;
 }
 
 .right {
   display: flex;
-  gap: 12px;
   align-items: center;
   gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .pill {
@@ -55,10 +63,10 @@
   font-family: 'Nunito', sans-serif;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 150ms ease, box-shadow 150ms ease;
-  text-decoration: none;
   transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
   line-height: 1;
+  white-space: nowrap;
+  min-height: 36px;
 }
 
 .pill:hover {
@@ -66,9 +74,18 @@
   box-shadow: 2px 2px 0 var(--ink);
 }
 
+.pillTextFull {
+  display: inline;
+}
+
+.pillTextShort {
+  display: none;
+}
+
 .themeToggle {
   font-size: 15px;
-  padding: 5px 10px;
+  padding: 5px 12px;
+  min-width: 36px;
 }
 
 .settingsPill {
@@ -92,7 +109,9 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 20px;
+  padding: 16px;
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
 }
 
 .modalCard {
@@ -102,6 +121,8 @@
   box-shadow: 6px 6px 0 var(--ink);
   max-width: 460px;
   width: 100%;
+  max-height: min(85vh, 600px);
+  overflow-y: auto;
   padding: 24px;
   animation: popIn 180ms ease forwards;
 }
@@ -139,8 +160,14 @@
   font-size: 18px;
   cursor: pointer;
   color: var(--brown);
-  padding: 4px;
+  padding: 8px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 8px;
 }
 
 .closeButton:hover {
@@ -165,6 +192,7 @@
   align-items: center;
   font-size: 14px;
   color: var(--ink);
+  gap: 10px;
 }
 
 .kbd {
@@ -176,15 +204,53 @@
   font-size: 12px;
   box-shadow: 2px 2px 0 var(--ink);
   color: var(--ink);
+  white-space: nowrap;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
+  .container {
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
+  }
   .right {
     gap: 6px;
   }
   .pill {
     padding: 5px 10px;
     font-size: 12px;
+    min-height: 34px;
+  }
+  .pillTextFull {
+    display: none;
+  }
+  .pillTextShort {
+    display: inline;
+  }
+  .modalCard {
+    padding: 18px 16px;
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+}
+
+@media (max-width: 380px) {
+  .logoText {
+    font-size: 18px;
+  }
+  .logoMark {
+    font-size: 18px;
+  }
+  .right {
+    gap: 4px;
+  }
+  .pill {
+    padding: 5px 7px;
+    font-size: 11px;
+  }
+  .shortcutItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 }
 

@@ -5,10 +5,15 @@
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
 }
 
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
   }
 }

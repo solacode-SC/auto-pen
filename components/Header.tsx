@@ -29,7 +29,7 @@ export default function Header() {
               onClick={() => setShowAbout(true)}
               aria-label="About Polish"
             >
-              About
+              <span>About</span>
             </button>
             <button
               className={`${styles.pill} ${styles.themeToggle}`}
@@ -44,14 +44,16 @@ export default function Header() {
               onClick={() => setShowShortcuts(true)}
               aria-label="Keyboard Shortcuts"
             >
-              Shortcuts
+              <span className={styles.pillTextFull}>Shortcuts</span>
+              <span className={styles.pillTextShort} aria-hidden="true">⌨</span>
             </button>
             <Link
               href="/settings"
               className={`${styles.pill} ${styles.settingsPill}`}
               aria-label="Open Settings"
             >
-              Settings ⚙
+              <span className={styles.pillTextFull}>Settings </span>
+              <span>⚙</span>
             </Link>
           </div>
         </div>

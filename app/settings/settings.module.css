@@ -1,11 +1,13 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 32px 20px 60px;
+  padding: clamp(20px, 4vw, 32px) clamp(14px, 3vw, 20px) max(40px, env(safe-area-inset-bottom));
+  padding-left: max(14px, env(safe-area-inset-left));
+  padding-right: max(14px, env(safe-area-inset-right));
 }
 
 .topBar {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .backLink {
@@ -22,6 +24,7 @@
   box-shadow: 2px 2px 0 var(--ink);
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease;
+  min-height: 38px;
 }
 
 .backLink:hover {
@@ -30,12 +33,12 @@
 }
 
 .header {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .title {
   font-family: 'Fredoka', sans-serif;
-  font-size: 36px;
+  font-size: clamp(26px, 6vw, 36px);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 8px;
@@ -49,7 +52,7 @@
 }
 
 .subtitle {
-  font-size: 16px;
+  font-size: clamp(14px, 3.5vw, 16px);
   color: var(--brown);
   line-height: 1.5;
 }
@@ -57,7 +60,7 @@
 .sections {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .card {
@@ -65,7 +68,7 @@
   border: 2px solid var(--ink);
   border-radius: 18px;
   box-shadow: 4px 4px 0 var(--ink);
-  padding: 24px;
+  padding: clamp(16px, 4vw, 24px);
 }
 
 .cardHeader {
@@ -81,16 +84,16 @@
 
 .cardTitle {
   font-family: 'Fredoka', sans-serif;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 600;
   color: var(--ink);
   margin: 0;
 }
 
 .cardDesc {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--brown);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   line-height: 1.5;
 }
 
@@ -113,10 +116,11 @@
   border-radius: 12px;
   background: var(--cream);
   color: var(--ink);
-  font-size: 14px;
+  font-size: 16px;
   font-family: monospace;
   outline: none;
   transition: border-color 150ms ease;
+  min-height: 46px;
 }
 
 .apiKeyInput:focus {
@@ -131,9 +135,10 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--brown);
-  padding: 4px;
+  padding: 8px;
+  min-height: 36px;
 }
 
 .actionButton {
@@ -148,6 +153,10 @@
   box-shadow: 3px 3px 0 var(--ink);
   transition: transform 150ms ease, box-shadow 150ms ease;
   white-space: nowrap;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .actionButton:hover:not(:disabled) {
@@ -178,6 +187,10 @@
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--ink);
   transition: transform 150ms ease, box-shadow 150ms ease;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .secondaryButton:hover:not(:disabled) {
@@ -196,9 +209,10 @@
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 8px;
   margin-top: 10px;
+  word-break: break-word;
 }
 
 .statusConfigured {
@@ -217,23 +231,25 @@
 .modeGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  gap: 12px;
   margin-bottom: 8px;
 }
 
 .modeCard {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
   border: 2px solid var(--ink);
   border-radius: 14px;
   background: var(--cream);
   color: var(--ink);
   cursor: pointer;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
   transition: transform 150ms ease, box-shadow 150ms ease;
+  min-height: 48px;
 }
 
 .modeCard:hover {
@@ -246,30 +262,31 @@
 }
 
 .modeIcon {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /* Color Accent Swatches */
 .accentGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .accentCard {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
+  gap: 8px;
+  padding: 9px 12px;
   border: 2px solid var(--ink);
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--cream);
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--ink);
+  min-height: 42px;
 }
 
 .accentCard:hover {
@@ -283,8 +300,8 @@
 }
 
 .accentSwatch {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: 2px solid var(--ink);
   flex-shrink: 0;
@@ -293,7 +310,7 @@
 /* Live Preview */
 .previewBox {
   margin-top: 16px;
-  padding: 16px;
+  padding: 14px 16px;
   border: 2px dashed rgba(31, 27, 22, 0.2);
   border-radius: 14px;
   background: var(--cream);
@@ -305,7 +322,7 @@
 }
 
 .previewLabel {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--brown);
   text-transform: uppercase;
@@ -318,22 +335,56 @@
   border: 2px solid var(--ink);
   box-shadow: 3px 3px 0 var(--ink);
   border-radius: 12px;
-  padding: 10px 24px;
-  font-size: 15px;
+  padding: 10px 22px;
+  font-size: 14px;
   font-weight: 700;
   cursor: default;
+  min-height: 44px;
 }
 
 @media (max-width: 640px) {
+  .card {
+    border-radius: 14px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
   .inputGroup {
     flex-direction: column;
   }
+  .actionButton {
+    width: 100%;
+  }
+  .buttonRow {
+    gap: 8px;
+  }
+  .secondaryButton {
+    flex: 1 1 calc(50% - 8px);
+  }
   .modeGrid {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
   .previewBox {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+  }
+  .previewButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .accentGrid {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 8px;
+  }
+  .accentCard {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .secondaryButton {
+    flex: 1 1 100%;
+    width: 100%;
   }
 }
 
