@@ -45,6 +45,9 @@ export default function Page() {
           text: text.trim(),
           type,
           apiKey: settings?.apiKey || undefined,
+          provider: settings?.provider || undefined,
+          model: settings?.model?.trim() || undefined,
+          customBaseUrl: settings?.customBaseUrl?.trim() || undefined,
         }),
       });
       const data = await response.json();

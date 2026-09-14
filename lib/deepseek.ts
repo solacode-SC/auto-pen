@@ -1,15 +1,27 @@
 import { WritingType } from './types';
 import { getSystemPrompt } from './prompts';
+import { executeCompletion, AIProvider } from './providers';
 
 export async function improveText(text: string, type: WritingType, customApiKey?: string): Promise<string> {
   const apiKey = customApiKey?.trim() || process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
     throw new Error('DEEPSEEK_API_KEY is not set. Please provide an API key in Settings or set DEEPSEEK_API_KEY.');
   }
+export interface ImproveOptions {
+  provider?: AIProvider;
+  model?: string;
+  customBaseUrl?: string;
+}
 
   const model = process.env.DEEPSEEK_MODEL || 'deepseek-chat';
   const baseUrl = process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com';
 
+export async function improveText(
+  text: string,
+  type: WritingType,
+  customApiKey?: string,
+  options?: ImproveOptions
+): Promise<string> {
   const systemPrompt = getSystemPrompt(type);
 
   try {
@@ -61,4 +73,12 @@ export async function improveText(text: string, type: WritingType, customApiKey?
     }
     throw new Error('An unknown error occurred while communicating with DeepSeek API');
   }
+  return executeCompletion({
+    text,
+    systemPrompt,
+    apiKey: customApiKey,
+    provider: options?.provider,
+    model: options?.model,
+    customBaseUrl: options?.customBaseUrl,
+  });
 }

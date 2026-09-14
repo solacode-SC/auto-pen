@@ -27,14 +27,49 @@ export async function POST(req: Request) {
     }
 
     const { text, type, apiKey: bodyApiKey } = body as { text: string; type: WritingType; apiKey?: string };
+    const {
+      text,
+      type,
+      apiKey: bodyApiKey,
+      provider: bodyProvider,
+      model: bodyModel,
+      customBaseUrl: bodyCustomBaseUrl,
+    } = body as {
+      text: string;
+      type: WritingType;
+      apiKey?: string;
+      provider?: any;
+      model?: string;
+      customBaseUrl?: string;
+    };
+
     const customApiKey = req.headers.get('x-api-key') || (typeof bodyApiKey === 'string' ? bodyApiKey : undefined);
     const improvedText = await improveText(text, type, customApiKey);
+    const provider = (req.headers.get('x-provider') || bodyProvider || undefined) as any;
+    const model = req.headers.get('x-model') || (typeof bodyModel === 'string' ? bodyModel : undefined);
+    const customBaseUrl = req.headers.get('x-base-url') || (typeof bodyCustomBaseUrl === 'string' ? bodyCustomBaseUrl : undefined);
+
+    const improvedText = await improveText(text, type, customApiKey, {
+      provider,
+      model,
+      customBaseUrl,
+    });
+    const options = (provider || model || customBaseUrl)
+      ? { provider, model, customBaseUrl }
+      : undefined;
+
+    const improvedText = options
+      ? await improveText(text, type, customApiKey, options)
+      : await improveText(text, type, customApiKey);
 
     return NextResponse.json({ success: true, text: improvedText });
   } catch (error) {
     console.error('Improve API error:', error instanceof Error ? error.message : 'Unknown error');
+    const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Improve API error:', errorMsg);
     return NextResponse.json(
       { success: false, error: 'Unable to improve text. Please try again.' },
+      { success: false, error: errorMsg || 'Unable to improve text. Please try again.' },
       { status: 500 }
     );
   }

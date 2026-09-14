@@ -97,6 +97,112 @@
   line-height: 1.5;
 }
 
+/* Provider Selector */
+.providerGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.providerChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cream);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 150ms ease;
+  min-height: 36px;
+}
+
+.providerChip:hover {
+  transform: translateY(-1px);
+  background: var(--paper);
+}
+
+.providerChipActive {
+  background: var(--yellow);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.providerBadge {
+  font-size: 12px;
+}
+
+.providerDesc {
+  font-size: 13px;
+  color: var(--brown);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.advancedToggle {
+  background: none;
+  border: none;
+  color: var(--brown);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.advancedToggle:hover {
+  color: var(--ink);
+}
+
+.advancedSection {
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px dashed rgba(31, 27, 22, 0.2);
+  border-radius: 12px;
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subInputLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brown);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.subInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14px;
+  font-family: monospace;
+  outline: none;
+}
+
+.subInput:focus {
+  border-color: var(--accent, var(--coral));
+}
+
 /* API Key Input Group */
 .inputGroup {
   display: flex;

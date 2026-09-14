@@ -1,3 +1,5 @@
+import { AIProvider, PROVIDERS } from './providers';
+
 export type ThemeMode = 'light' | 'dark';
 
 export type AccentColor = 'coral' | 'purple' | 'blue' | 'green' | 'pink';
@@ -6,6 +8,9 @@ export interface AppSettings {
   apiKey: string;
   theme: ThemeMode;
   accent: AccentColor;
+  provider?: AIProvider;
+  model?: string;
+  customBaseUrl?: string;
 }
 
 export const DEFAULT_SETTINGS: AppSettings = {
@@ -24,6 +29,10 @@ export const ACCENT_COLORS: { value: AccentColor; label: string; color: string }
 
 const STORAGE_KEY = 'polish-settings';
 
+export function getEffectiveProvider(settings: AppSettings): AIProvider {
+  return settings.provider || 'deepseek';
+}
+
 export function loadSettings(): AppSettings {
   if (typeof window === 'undefined') return DEFAULT_SETTINGS;
   try {
@@ -31,10 +40,21 @@ export function loadSettings(): AppSettings {
     if (!raw) return DEFAULT_SETTINGS;
     const parsed = JSON.parse(raw);
     return {
+    const settings: AppSettings = {
       apiKey: typeof parsed.apiKey === 'string' ? parsed.apiKey : '',
       theme: parsed.theme === 'dark' ? 'dark' : 'light',
       accent: ACCENT_COLORS.some(a => a.value === parsed.accent) ? parsed.accent : 'coral',
     };
+    if (parsed.provider && typeof parsed.provider === 'string' && parsed.provider in PROVIDERS) {
+      settings.provider = parsed.provider as AIProvider;
+    }
+    if (parsed.model && typeof parsed.model === 'string') {
+      settings.model = parsed.model;
+    }
+    if (parsed.customBaseUrl && typeof parsed.customBaseUrl === 'string') {
+      settings.customBaseUrl = parsed.customBaseUrl;
+    }
+    return settings;
   } catch {
     return DEFAULT_SETTINGS;
   }

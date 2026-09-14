@@ -5,24 +5,56 @@ import Link from 'next/link';
 import styles from './settings.module.css';
 import { useSettings } from '@/components/SettingsProvider';
 import { ACCENT_COLORS, DEFAULT_SETTINGS } from '@/lib/settings';
+import { PROVIDERS, PROVIDER_LIST, detectProviderFromKey, type AIProvider } from '@/lib/providers';
 
 export default function SettingsPage() {
   const { settings, updateApiKey, updateTheme, updateAccent } = useSettings();
+  const {
+    settings,
+    updateApiKey,
+    updateTheme,
+    updateAccent,
+    updateProvider,
+    updateModel,
+    updateCustomBaseUrl,
+  } = useSettings();
+
+  const [selectedProvider, setSelectedProvider] = useState<AIProvider>(settings.provider || 'deepseek');
   const [apiKeyInput, setApiKeyInput] = useState(settings.apiKey);
+  const [modelInput, setModelInput] = useState(settings.model || '');
+  const [baseUrlInput, setBaseUrlInput] = useState(settings.customBaseUrl || '');
+  const [showAdvanced, setShowAdvanced] = useState(Boolean(settings.model || settings.customBaseUrl));
   const [showKey, setShowKey] = useState(false);
   const [savedFeedback, setSavedFeedback] = useState(false);
   const [testStatus, setTestStatus] = useState<string | null>(null);
   const [isTesting, setIsTesting] = useState(false);
 
+  const activeProvider = PROVIDERS[selectedProvider] || PROVIDERS.deepseek;
+
+  const handleApiKeyChange = (val: string) => {
+    setApiKeyInput(val);
+    const detected = detectProviderFromKey(val);
+    if (detected && detected !== selectedProvider) {
+      setSelectedProvider(detected);
+    }
+  };
+
   const handleSaveApiKey = () => {
     updateApiKey(apiKeyInput.trim());
+    updateProvider(selectedProvider);
+    updateModel(modelInput.trim());
+    updateCustomBaseUrl(baseUrlInput.trim());
     setSavedFeedback(true);
     setTimeout(() => setSavedFeedback(false), 2000);
   };
 
   const handleClearApiKey = () => {
     setApiKeyInput('');
+    setModelInput('');
+    setBaseUrlInput('');
     updateApiKey('');
+    updateModel('');
+    updateCustomBaseUrl('');
     setSavedFeedback(true);
     setTimeout(() => setSavedFeedback(false), 2000);
   };
@@ -30,6 +62,9 @@ export default function SettingsPage() {
   const handleTestKey = async () => {
     const keyToTest = apiKeyInput.trim();
     if (!keyToTest) {
+    const isLocalCustom = selectedProvider === 'custom' && (baseUrlInput.includes('localhost') || baseUrlInput.includes('127.0.0.1'));
+
+    if (!keyToTest && !isLocalCustom) {
       setTestStatus('Please enter an API key to test.');
       return;
     }
@@ -43,17 +78,22 @@ export default function SettingsPage() {
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': keyToTest,
+          'x-provider': selectedProvider,
         },
         body: JSON.stringify({
           text: 'hello world test connection',
           type: 'message',
           apiKey: keyToTest,
+          provider: selectedProvider,
+          model: modelInput.trim() || undefined,
+          customBaseUrl: baseUrlInput.trim() || undefined,
         }),
       });
 
       const data = await res.json();
       if (data.success) {
         setTestStatus('✓ API key is working properly!');
+        setTestStatus(`✓ ${activeProvider.name} is working properly!`);
       } else {
         setTestStatus(`Connection error: ${data.error || 'Failed'}`);
       }
@@ -65,8 +105,15 @@ export default function SettingsPage() {
   };
 
   const handleResetDefaults = () => {
+    setSelectedProvider('deepseek');
     setApiKeyInput(DEFAULT_SETTINGS.apiKey);
+    setModelInput('');
+    setBaseUrlInput('');
+    setShowAdvanced(false);
     updateApiKey(DEFAULT_SETTINGS.apiKey);
+    updateProvider('deepseek');
+    updateModel('');
+    updateCustomBaseUrl('');
     updateTheme(DEFAULT_SETTINGS.theme);
     updateAccent(DEFAULT_SETTINGS.accent);
   };
@@ -85,18 +132,43 @@ export default function SettingsPage() {
         </h1>
         <p className={styles.subtitle}>
           Customize your writing workspace, API connection, and personal appearance.
+          Customize your writing workspace, AI company/provider connection, and personal appearance.
         </p>
       </header>
 
       <div className={styles.sections}>
         {/* Section 1: DeepSeek API Key */}
+        {/* Section 1: AI Provider & API Key */}
         <section className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.cardIcon}>🔑</span>
             <h2 className={styles.cardTitle}>DeepSeek API Key</h2>
+            <h2 className={styles.cardTitle}>AI Provider & API Key</h2>
           </div>
           <p className={styles.cardDesc}>
             Use your own DeepSeek API key for text improvement. Your key is kept only in your browser&apos;s local storage and is sent directly with your requests.
+            Connect Polish to any AI company. Choose your provider or paste your API key to auto-detect. Keys are saved strictly in your local browser storage.
+          </p>
+
+          {/* Provider Selection Chips */}
+          <div className={styles.providerGrid}>
+            {PROVIDER_LIST.map((prov) => (
+              <button
+                key={prov.id}
+                type="button"
+                className={`${styles.providerChip} ${
+                  selectedProvider === prov.id ? styles.providerChipActive : ''
+                }`}
+                onClick={() => setSelectedProvider(prov.id)}
+              >
+                <span className={styles.providerBadge}>{prov.badge}</span>
+                <span>{prov.name}</span>
+              </button>
+            ))}
+          </div>
+
+          <p className={styles.providerDesc}>
+            {activeProvider.description}
           </p>
 
           <div className={styles.inputGroup}>
@@ -105,9 +177,12 @@ export default function SettingsPage() {
                 type={showKey ? 'text' : 'password'}
                 className={styles.apiKeyInput}
                 placeholder="sk-..."
+                placeholder={selectedProvider === 'deepseek' ? 'sk-...' : activeProvider.placeholder}
                 value={apiKeyInput}
                 onChange={(e) => setApiKeyInput(e.target.value)}
                 aria-label="DeepSeek API Key"
+                onChange={(e) => handleApiKeyChange(e.target.value)}
+                aria-label="API Key"
               />
               <button
                 type="button"
@@ -131,16 +206,55 @@ export default function SettingsPage() {
               className={styles.secondaryButton}
               onClick={handleTestKey}
               disabled={isTesting || !apiKeyInput.trim()}
+              disabled={isTesting || (!apiKeyInput.trim() && selectedProvider !== 'custom')}
             >
               {isTesting ? 'Testing...' : 'Test Connection'}
+              {isTesting ? 'Testing...' : `Test ${activeProvider.name}`}
             </button>
             <button
               className={styles.secondaryButton}
               onClick={handleClearApiKey}
               disabled={!apiKeyInput && !settings.apiKey}
+              disabled={!apiKeyInput && !settings.apiKey && !modelInput && !baseUrlInput}
             >
               Clear Key
             </button>
+          </div>
+
+          {/* Advanced Model & Endpoint Toggle */}
+          <div>
+            <button
+              type="button"
+              className={styles.advancedToggle}
+              onClick={() => setShowAdvanced(!showAdvanced)}
+            >
+              {showAdvanced ? '▾ Hide Model & Endpoint Settings' : '▸ Custom Model & Base URL (Advanced)'}
+            </button>
+
+            {showAdvanced && (
+              <div className={styles.advancedSection}>
+                <div className={styles.subField}>
+                  <label className={styles.subInputLabel}>Custom Model (Optional)</label>
+                  <input
+                    type="text"
+                    className={styles.subInput}
+                    placeholder={`Default: ${activeProvider.defaultModel}`}
+                    value={modelInput}
+                    onChange={(e) => setModelInput(e.target.value)}
+                  />
+                </div>
+                <div className={styles.subField}>
+                  <label className={styles.subInputLabel}>Custom Base URL (Optional)</label>
+                  <input
+                    type="text"
+                    className={styles.subInput}
+                    placeholder={`Default: ${activeProvider.defaultBaseUrl}`}
+                    value={baseUrlInput}
+                    onChange={(e) => setBaseUrlInput(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {testStatus && (
@@ -157,10 +271,12 @@ export default function SettingsPage() {
             {settings.apiKey ? (
               <span className={`${styles.statusNotice} ${styles.statusConfigured}`}>
                 ✓ Using Custom Browser API Key
+                ✓ Using Custom {PROVIDERS[settings.provider || 'deepseek']?.name || 'AI'} API Key
               </span>
             ) : (
               <span className={`${styles.statusNotice} ${styles.statusNotConfigured}`}>
                 ℹ Using Server Environment Default (if configured)
+                ℹ Using Server Environment Default ({PROVIDERS[settings.provider || 'deepseek']?.name || 'DeepSeek'})
               </span>
             )}
           </div>
