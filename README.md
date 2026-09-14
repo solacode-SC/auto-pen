@@ -2,6 +2,8 @@
 
 > AI-Powered Text Improvement Web Application
 
+![Polish Screenshot](public/screenshot.png)
+
 Polish is an AI-powered text improvement web application designed to refine, enhance, and transform your writing with precision. Powered by DeepSeek's advanced LLM models, Polish delivers smart rewriting, grammar and style adjustments, tone customization, and concise editing through a clean, modern user interface.
 
 ## Features
