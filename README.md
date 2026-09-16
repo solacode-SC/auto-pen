@@ -139,12 +139,34 @@ All primary development and deployment commands are managed via `Makefile`:
 ## Environment Variables
 
 Configure the application using the following environment variables:
+Configure the application using the following environment variables (or provide your key directly in the in-app Settings UI):
 
 | Variable | Required | Default | Description |
 |---|---|---|---|
 | `DEEPSEEK_API_KEY` | **Yes** | — | API key for authenticating with DeepSeek API |
+| `AI_PROVIDER` | No | `deepseek` | Active provider (`deepseek`, `openai`, `anthropic`, `gemini`, `groq`, `openrouter`, `custom`) |
+| `DEEPSEEK_API_KEY` | Optional | — | DeepSeek API key |
 | `DEEPSEEK_MODEL` | No | `deepseek-chat` | DeepSeek LLM model identifier |
 | `DEEPSEEK_BASE_URL` | No | `https://api.deepseek.com` | Base URL for the DeepSeek API endpoint |
+| `DEEPSEEK_BASE_URL` | No | `https://api.deepseek.com` | Base URL for DeepSeek endpoint |
+| `OPENAI_API_KEY` | Optional | — | OpenAI API key |
+| `OPENAI_MODEL` | No | `gpt-4o-mini` | OpenAI model identifier |
+| `OPENAI_BASE_URL` | No | `https://api.openai.com` | Base URL for OpenAI endpoint |
+| `ANTHROPIC_API_KEY` | Optional | — | Anthropic Claude API key |
+| `ANTHROPIC_MODEL` | No | `claude-3-5-haiku-20241022` | Anthropic model identifier |
+| `ANTHROPIC_BASE_URL` | No | `https://api.anthropic.com` | Base URL for Anthropic endpoint |
+| `GEMINI_API_KEY` | Optional | — | Google Gemini API key |
+| `GEMINI_MODEL` | No | `gemini-2.0-flash` | Google Gemini model identifier |
+| `GEMINI_BASE_URL` | No | `https://generativelanguage.googleapis.com/v1beta/openai` | Base URL for Gemini OpenAI-compatible endpoint |
+| `GROQ_API_KEY` | Optional | — | Groq API key |
+| `GROQ_MODEL` | No | `llama-3.3-70b-versatile` | Groq model identifier |
+| `GROQ_BASE_URL` | No | `https://api.groq.com/openai` | Base URL for Groq endpoint |
+| `OPENROUTER_API_KEY` | Optional | — | OpenRouter API key |
+| `OPENROUTER_MODEL` | No | `deepseek/deepseek-chat` | OpenRouter model identifier |
+| `OPENROUTER_BASE_URL` | No | `https://openrouter.ai/api` | Base URL for OpenRouter endpoint |
+| `CUSTOM_API_KEY` | Optional | — | Custom / Local endpoint API key |
+| `CUSTOM_MODEL` | No | `llama3` | Custom model name |
+| `CUSTOM_BASE_URL` | No | `http://localhost:11434/v1` | Custom / Local OpenAI-compatible base URL (e.g. Ollama, LM Studio) |
 
 ## Tech Stack
 
@@ -153,9 +175,11 @@ Configure the application using the following environment variables:
 - **UI Library**: React 19
 - **Styling**: CSS Modules
 - **AI Integration**: DeepSeek API
+- **AI Integration**: Universal Multi-Provider (DeepSeek, OpenAI, Anthropic Claude, Google Gemini, Groq, OpenRouter, Custom/Local)
 - **Containerization**: Docker & Docker Compose
 - **Task Runner**: Make
 
 ## License
 
 MIT
+

@@ -1,7 +1,7 @@
 .header {
   min-height: 56px;
   background: var(--cream);
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid var(--border);
   width: 100%;
   position: relative;
   z-index: 100;
@@ -55,7 +55,7 @@
   align-items: center;
   justify-content: center;
   background: var(--paper);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--border);
   border-radius: 20px;
   padding: 6px 14px;
   font-size: 13px;
@@ -71,7 +71,7 @@
 
 .pill:hover {
   transform: translateY(-1px);
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--shadow);
 }
 
 .pillTextFull {
@@ -90,10 +90,12 @@
 
 .settingsPill {
   background: var(--yellow);
+  color: var(--badge-dark-text);
+  font-weight: 700;
 }
 
 .settingsPill:hover {
-  background: var(--yellow-light);
+  filter: brightness(1.06);
 }
 
 /* Modals */
@@ -103,8 +105,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(31, 27, 22, 0.4);
-  backdrop-filter: blur(2px);
+  background: var(--modal-overlay);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,9 +118,9 @@
 
 .modalCard {
   background: var(--paper);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--border);
   border-radius: 18px;
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 6px 6px 0 var(--shadow);
   max-width: 460px;
   width: 100%;
   max-height: min(85vh, 600px);
@@ -144,7 +146,7 @@
   align-items: center;
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(31, 27, 22, 0.1);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .modalHeader h3 {
@@ -196,13 +198,13 @@
 }
 
 .kbd {
-  background: var(--cream);
-  border: 1.5px solid var(--ink);
+  background: var(--well-bg);
+  border: 1.5px solid var(--border);
   border-radius: 8px;
   padding: 4px 10px;
   font-family: monospace;
   font-size: 12px;
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--shadow);
   color: var(--ink);
   white-space: nowrap;
 }
@@ -229,7 +231,7 @@
   .modalCard {
     padding: 18px 16px;
     border-radius: 14px;
-    box-shadow: 4px 4px 0 var(--ink);
+    box-shadow: 4px 4px 0 var(--shadow);
   }
 }
 

@@ -14,25 +14,45 @@
   --brown: #6C5B45;
   --ink: #1F1B16;
 
+  /* Theme-aware structural tokens */
+  --border: #1F1B16;
+  --border-subtle: rgba(31, 27, 22, 0.12);
+  --shadow: #1F1B16;
+  --well-bg: #FFF3DE;
+  --modal-overlay: rgba(31, 27, 22, 0.45);
+  --placeholder: #9C8B77;
+  --highlight-bg: var(--yellow);
+  --badge-dark-text: #1F1B16;
+
   /* Dynamic accent for buttons and highlights */
   --accent: #FF5964;
   --accent-hover: #e84e58;
 }
 
 [data-theme="dark"] {
-  --cream: #181512;
-  --paper: #24201A;
-  --yellow: #F7D02C;
-  --yellow-light: #4A3E14;
-  --coral: #FF6873;
+  --cream: #14120F;
+  --paper: #1F1B16;
+  --yellow: #FFD738;
+  --yellow-light: #FFE066;
+  --coral: #FF6875;
   --pink: #F57896;
   --green: #7AE044;
-  --green-light: #203D14;
+  --green-light: #1C3312;
   --turquoise: #1ED4C3;
   --blue: #4EC0EF;
   --purple: #A573F0;
-  --brown: #C2B29B;
-  --ink: #FAF4E8;
+  --brown: #A89A86;
+  --ink: #F7F2E7;
+
+  /* Theme-aware structural tokens */
+  --border: #3D3528;
+  --border-subtle: rgba(247, 242, 231, 0.09);
+  --shadow: #070605;
+  --well-bg: #161310;
+  --modal-overlay: rgba(5, 4, 3, 0.82);
+  --placeholder: #736758;
+  --highlight-bg: rgba(255, 215, 56, 0.35);
+  --badge-dark-text: #14120E;
 }
 
 * {
@@ -83,8 +103,8 @@ body {
 
 /* Custom selection color */
 ::selection {
-  background: var(--yellow-light);
-  color: var(--ink);
+  background: var(--yellow);
+  color: #1F1B16;
 }
 
 /* Scrollbar styling */
@@ -97,12 +117,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brown);
+  background: var(--border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--ink);
+  background: var(--brown);
 }
 
 /* Respect reduced motion */

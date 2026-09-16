@@ -45,6 +45,9 @@ export default function Page() {
           text: text.trim(),
           type,
           apiKey: settings?.apiKey || undefined,
+          provider: settings?.provider || undefined,
+          model: settings?.model?.trim() || undefined,
+          customBaseUrl: settings?.customBaseUrl?.trim() || undefined,
         }),
       });
       const data = await response.json();
@@ -58,7 +61,7 @@ export default function Page() {
     } finally {
       setLoading(false);
     }
-  }, [text, type, settings?.apiKey]);
+  }, [text, type, settings?.apiKey, settings?.provider, settings?.model, settings?.customBaseUrl]);
 
   const handleCopy = useCallback(async () => {
     try {

@@ -1,7 +1,7 @@
 .card {
-  border: 2px solid var(--ink);
+  border: 2px solid var(--border);
   border-radius: 18px;
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 4px 4px 0 var(--shadow);
   background: var(--paper);
   overflow: hidden;
   display: flex;
@@ -18,7 +18,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(31, 27, 22, 0.1);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .headerLeft {
@@ -65,12 +65,17 @@
   flex-grow: 1;
 }
 
+.textarea::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
 .footer {
   padding: 10px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(31, 27, 22, 0.1);
+  border-top: 1px solid var(--border-subtle);
   font-size: 13px;
   color: var(--brown);
   flex-wrap: wrap;
@@ -108,7 +113,7 @@
   }
   .card {
     border-radius: 14px;
-    box-shadow: 3px 3px 0 var(--ink);
+    box-shadow: 3px 3px 0 var(--shadow);
   }
   .textarea {
     min-height: 200px;
